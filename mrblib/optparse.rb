@@ -545,7 +545,7 @@ class OptionParser
       if conv
         val = conv.call(*val)
       else
-        val = proc {|v| v}.call(*val)
+        val = lambda {|v| v}.call(*val)
       end
       return arg, block, val
     end
@@ -955,7 +955,7 @@ _arguments -s -S \
   # --help
   # Shows option summary.
   #
-  Officious['help'] = proc do |parser|
+  Officious['help'] = lambda do |parser|
     Switch::NoArgument.new do |arg|
       puts parser.help
       exit
@@ -966,7 +966,7 @@ _arguments -s -S \
   # --*-completion-bash=WORD
   # Shows candidates for command line completion.
   #
-  Officious['*-completion-bash'] = proc do |parser|
+  Officious['*-completion-bash'] = lambda do |parser|
     Switch::RequiredArgument.new do |arg|
       puts parser.candidate(arg)
       exit
@@ -977,7 +977,7 @@ _arguments -s -S \
   # --*-completion-zsh[=NAME:FILE]
   # Creates zsh completion file.
   #
-  Officious['*-completion-zsh'] = proc do |parser|
+  Officious['*-completion-zsh'] = lambda do |parser|
     Switch::OptionalArgument.new do |arg|
       parser.compsys(STDOUT, arg)
       exit
@@ -988,7 +988,7 @@ _arguments -s -S \
   # --version
   # Shows version string if Version is defined.
   #
-  Officious['version'] = proc do |parser|
+  Officious['version'] = lambda do |parser|
     Switch::OptionalArgument.new do |pkg|
       if pkg
         begin
@@ -1234,7 +1234,7 @@ _arguments -s -S \
   # +indent+:: Indentation, defaults to @summary_indent.
   #
   def summarize(to = [], width = @summary_width, max = width - 1, indent = @summary_indent, &blk)
-    blk ||= proc {|l| to << (l.index($/, -1) ? l : l + $/)}
+    blk ||= lambda {|l| to << (l.index($/, -1) ? l : l + $/)}
     visit(:summarize, {}, {}, width, max, indent, &blk)
     to
   end
@@ -1267,7 +1267,7 @@ _arguments -s -S \
   end
   private :notwice
 
-  SPLAT_PROC = proc {|*a| a.length <= 1 ? a.first : a} # :nodoc:
+  SPLAT_PROC = lambda {|*a| a.length <= 1 ? a.first : a} # :nodoc:
   #
   # Creates an OptionParser::Switch from the parameters. The parsed argument
   # value is passed to the given block, where it can be processed.
@@ -1521,7 +1521,7 @@ _arguments -s -S \
 
   def parse_in_order(argv = default_argv, setter = nil, &nonopt)  # :nodoc:
     opt, arg, val, rest = nil
-    nonopt ||= proc {|a| throw :terminate, a}
+    nonopt ||= lambda {|a| throw :terminate, a}
     argv.unshift(arg) if arg = catch(:terminate) {
       while arg = argv.shift
         case arg
