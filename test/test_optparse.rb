@@ -5,7 +5,7 @@ class TestOptionParser < MTest::Unit::TestCase
   end
 
   class DummyOutput < String
-    alias write <<
+    #alias write <<
   end
   def assert_no_error(*args)
     $stderr, stderr = DummyOutput.new, $stderr
