@@ -431,7 +431,7 @@ class OptionParser
     def complete(key, icase = false, pat = nil)
       candidates = candidate(key, icase, pat, &method(:each)).sort_by {|k, v, kn| kn.size}
       if candidates.size == 1
-        canon, sw, * = candidates[0]
+        canon, sw, _ = candidates[0]
       elsif candidates.size > 1
         canon, sw, cn = candidates.shift
         candidates.each do |k, v, kn|
