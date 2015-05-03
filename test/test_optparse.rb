@@ -15,7 +15,7 @@ class TestOptionParser < Test::Unit::TestCase
     assert_nothing_raised(*args) {return yield}
   ensure
     stderr, $stderr = $stderr, stderr
-    $!.backtrace.delete_if {|e| /\A#{Regexp.quote(__FILE__)}:#{__LINE__-2}/o =~ e} if $!
+    $!.backtrace.delete_if {|e| /\A#{Regexp.quote(__FILE__)}:#{__LINE__-2}/ =~ e} if $!
     assert_empty(stderr)
   end
   alias no_error assert_no_error
