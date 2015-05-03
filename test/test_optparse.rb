@@ -61,6 +61,6 @@ class TestOptionParser < Test::Unit::TestCase
     assert_equal(%w"", no_error {@opt.parse!(%w"--regexp=/foo/i")})
     assert_equal(/foo/i, @reopt)
     assert_equal(%w"", no_error {@opt.parse!(%w"--regexp=/foo/n")})
-    assert_equal(/foo/n, @reopt)
+    assert_equal(/foo/, @reopt)
   end
 end
