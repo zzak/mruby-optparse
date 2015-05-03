@@ -1,0 +1,9 @@
+MRuby::Gem::Specification.new('mruby-optparse') do |spec|
+  spec.license = 'MIT'
+  spec.author  = 'zzak'
+  spec.summary = 'Command-line option analysis with the OptionParser class.'
+
+  spec.add_dependency 'mruby-io'
+  spec.add_dependency 'mruby-mtest'
+  spec.add_dependency 'mruby-onig-regexp'
+end
