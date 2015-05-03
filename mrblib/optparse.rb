@@ -2132,8 +2132,3 @@ _arguments -s -S \
     const_set(:DecimalNumeric, OptionParser::DecimalNumeric)
   end
 end
-
-# ARGV is arguable by OptionParser
-ARGV.extend(OptionParser::Arguable)
-
-OptParse = OptionParser
