@@ -1,4 +1,4 @@
-class TestOptionParser < Test::Unit::TestCase
+class TestOptionParser < MTest::Unit::TestCase
   def setup
     @opt = OptionParser.new
     @flag = self.class		# cannot set by option
@@ -61,3 +61,5 @@ class TestOptionParser < Test::Unit::TestCase
     assert_equal(/foo/, @reopt)
   end
 end
+
+MTest::Unit.new.run
