@@ -930,13 +930,12 @@ class OptionParser
   DefaultList.long[''] = Switch::NoArgument.new {throw :terminate}
 
 
-  COMPSYS_HEADER = <<'XXX'      # :nodoc:
-
+  COMPSYS_HEADER = "
 typeset -A opt_args
 local context state line
 
 _arguments -s -S \
-XXX
+"
 
   def compsys(to, name = File.basename($0)) # :nodoc:
     to << "#compdef #{name}\n"
