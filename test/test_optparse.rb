@@ -1,6 +1,3 @@
-require 'test/unit'
-require 'optparse'
-
 class TestOptionParser < Test::Unit::TestCase
   def setup
     @opt = OptionParser.new
