@@ -506,7 +506,7 @@ class OptionParser
 
     def initialize(pattern = nil, conv = nil,
                    short = nil, long = nil, arg = nil,
-                   desc = ([] if short or long), block = Proc.new)
+                   desc = ([] if short or long), block = Proc.new{})
       raise if Array === pattern
       @pattern, @conv, @short, @long, @arg, @desc, @block =
         pattern, conv, short, long, arg, desc, block
