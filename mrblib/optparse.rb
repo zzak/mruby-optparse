@@ -203,14 +203,14 @@
 #
 class OptionParser
   # :stopdoc:
-  RCSID = %w$Id$[1..-1].each {|s| s.freeze}.freeze
-  Version = (RCSID[1].split('.').collect {|s| s.to_i}.extend(Comparable).freeze if RCSID[1])
+  RCSID = %w$Id$[1..-1]
+  Version = (RCSID[1].split('.').collect {|s| s.to_i}.extend(Comparable) if RCSID[1])
   LastModified = (Time.gm(*RCSID[2, 2].join('-').scan(/\d+/).collect {|s| s.to_i}) if RCSID[2])
   Release = RCSID[2]
 
-  NoArgument = [NO_ARGUMENT = :NONE, nil].freeze
-  RequiredArgument = [REQUIRED_ARGUMENT = :REQUIRED, true].freeze
-  OptionalArgument = [OPTIONAL_ARGUMENT = :OPTIONAL, false].freeze
+  NoArgument = [NO_ARGUMENT = :NONE, nil]
+  RequiredArgument = [REQUIRED_ARGUMENT = :REQUIRED, true]
+  OptionalArgument = [OPTIONAL_ARGUMENT = :OPTIONAL, false]
   # :startdoc:
 
   #
@@ -690,7 +690,6 @@ class OptionParser
   NoArgument.each {|el| ArgumentStyle[el] = Switch::NoArgument}
   RequiredArgument.each {|el| ArgumentStyle[el] = Switch::RequiredArgument}
   OptionalArgument.each {|el| ArgumentStyle[el] = Switch::OptionalArgument}
-  ArgumentStyle.freeze
 
   #
   # Switches common used such as '--', and also provides default
@@ -1594,7 +1593,7 @@ class OptionParser
   #
   class ParseError < RuntimeError
     # Reason which caused the error.
-    Reason = 'parse error'.freeze
+    Reason = 'parse error'
 
     def initialize(*args)
       @args = args
@@ -1646,42 +1645,42 @@ class OptionParser
   # Raises when ambiguously completable string is encountered.
   #
   class AmbiguousOption < ParseError
-    const_set(:Reason, 'ambiguous option'.freeze)
+    const_set(:Reason, 'ambiguous option')
   end
 
   #
   # Raises when there is an argument for a switch which takes no argument.
   #
   class NeedlessArgument < ParseError
-    const_set(:Reason, 'needless argument'.freeze)
+    const_set(:Reason, 'needless argument')
   end
 
   #
   # Raises when a switch with mandatory argument has no argument.
   #
   class MissingArgument < ParseError
-    const_set(:Reason, 'missing argument'.freeze)
+    const_set(:Reason, 'missing argument')
   end
 
   #
   # Raises when switch is undefined.
   #
   class InvalidOption < ParseError
-    const_set(:Reason, 'invalid option'.freeze)
+    const_set(:Reason, 'invalid option')
   end
 
   #
   # Raises when the given argument does not match required format.
   #
   class InvalidArgument < ParseError
-    const_set(:Reason, 'invalid argument'.freeze)
+    const_set(:Reason, 'invalid argument')
   end
 
   #
   # Raises when the given argument word can't be completed uniquely.
   #
   class AmbiguousArgument < InvalidArgument
-    const_set(:Reason, 'ambiguous argument'.freeze)
+    const_set(:Reason, 'ambiguous argument')
   end
 
   #
