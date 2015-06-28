@@ -1783,13 +1783,3 @@ class OptionParser
     const_set(:DecimalNumeric, OptionParser::DecimalNumeric)
   end
 end
-
-# ARGV is arguable by OptionParser
-ARGV.extend(OptionParser::Arguable)
-
-if $0 == __FILE__
-  Version = OptionParser::Version
-  ARGV.options {|q|
-    q.parse!.empty? or puts "what's #{ARGV.join(' ')}?"
-  } or abort(ARGV.options.to_s)
-end
