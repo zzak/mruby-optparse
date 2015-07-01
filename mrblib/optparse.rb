@@ -914,11 +914,11 @@ class OptionParser
     end
   end
 
-  def warn(mesg = $!)
+  def warn(mesg!)
     super("#{program_name}: #{mesg}")
   end
 
-  def abort(mesg = $!)
+  def abort(mesg)
     super("#{program_name}: #{mesg}")
   end
 
@@ -1258,15 +1258,15 @@ class OptionParser
           opt, rest = $1, $2
           begin
             sw, = complete(:long, opt, true)
-          rescue ParseError
-            raise $!.set_option(arg, true)
+          rescue ParseError => e
+            raise e.set_option(arg, true)
           end
           begin
             opt, cb, val = sw.parse(rest, argv) {|*exc| raise(*exc)}
             val = cb.call(val) if cb
             setter.call(sw.switch_name, val) if setter
-          rescue ParseError
-            raise $!.set_option(arg, rest)
+          rescue ParseError => e
+            raise e.set_option(arg, rest)
           end
 
         # short option
@@ -1287,8 +1287,8 @@ class OptionParser
                 eq ||= !rest
               end
             end
-          rescue ParseError
-            raise $!.set_option(arg, true)
+          rescue ParseError => e
+            raise e.set_option(arg, true)
           end
           begin
             opt, cb, val = sw.parse(val, argv) {|*exc| raise(*exc) if eq}
@@ -1296,8 +1296,8 @@ class OptionParser
             argv.unshift(opt) if opt and (opt = opt.sub(/\A-*/, '-')) != '-'
             val = cb.call(val) if cb
             setter.call(sw.switch_name, val) if setter
-          rescue ParseError
-            raise $!.set_option(arg, arg.length > 2)
+          rescue ParseError => e
+            raise e.set_option(arg, arg.length > 2)
           end
 
         # non-option argument
@@ -1721,8 +1721,8 @@ class OptionParser
       block_given? or return @optparse
       begin
         yield @optparse
-      rescue ParseError
-        @optparse.warn $!
+      rescue ParseError => e
+        @optparse.warn e
         nil
       end
     end
