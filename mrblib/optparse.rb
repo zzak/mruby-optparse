@@ -1058,7 +1058,7 @@ class OptionParser
   # 
   # [Handler:]
   #   Handler for the parsed argument value. Either give a block or pass a
-  #   Proc or Method as an argument.
+  #   Proc as an argument.
   #
   def make_switch(opts, block = nil)
     short, long, nolong, style, pattern, conv, not_pattern, not_conv, not_style = [], [], []
@@ -1089,7 +1089,7 @@ class OptionParser
 
       # anything others
       case o
-      when Proc, Method
+      when Proc
         block = notwice(o, block, 'block')
       when Array, Hash
         case pattern
