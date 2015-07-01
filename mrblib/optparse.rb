@@ -914,7 +914,7 @@ class OptionParser
     end
   end
 
-  def warn(mesg!)
+  def warn(mesg)
     super("#{program_name}: #{mesg}")
   end
 
