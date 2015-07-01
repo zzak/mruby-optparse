@@ -349,7 +349,7 @@ class OptionParser
       if conv
         val = conv.call(*val)
       else
-        val = proc {|val| val}.call(*val)
+        val = lambda {|val| val}.call(*val)
       end
       return arg, block, val
     end
@@ -708,7 +708,7 @@ class OptionParser
   # --help
   # Shows option summary.
   #
-  Officious['help'] = proc do |parser|
+  Officious['help'] = lambda do |parser|
     Switch::NoArgument.new do
       puts parser.help
       exit
@@ -719,7 +719,7 @@ class OptionParser
   # --version
   # Shows version string if Version is defined.
   #
-  Officious['version'] = proc do |parser|
+  Officious['version'] = lambda do |parser|
     Switch::OptionalArgument.new do |pkg|
       if pkg
         begin
@@ -965,7 +965,7 @@ class OptionParser
   # +indent+:: Indentation, defaults to @summary_indent.
   #
   def summarize(to = [], width = @summary_width, max = width - 1, indent = @summary_indent, &blk)
-    blk ||= proc {|l| to << (l.index($/, -1) ? l : l + $/)}
+    blk ||= lambda {|l| to << (l.index($/, -1) ? l : l + $/)}
     visit(:summarize, {}, {}, width, max, indent, &blk)
     to
   end
@@ -1249,7 +1249,7 @@ class OptionParser
 
   def parse_in_order(argv = default_argv, setter = nil, &nonopt)  # :nodoc:
     opt, arg, sw, val, rest = nil
-    nonopt ||= proc {|arg| throw :terminate, arg}
+    nonopt ||= lambda {|arg| throw :terminate, arg}
     argv.unshift(arg) if arg = catch(:terminate) {
       while arg = argv.shift
         case arg
