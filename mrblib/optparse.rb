@@ -296,7 +296,7 @@ class OptionParser
       else
         t = Switch::RequiredArgument
       end
-      self >= t or incompatible_argument_styles(arg, t)
+      self == t or incompatible_argument_styles(arg, t)
       t
     end
 
