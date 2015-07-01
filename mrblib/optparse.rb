@@ -1353,11 +1353,11 @@ class OptionParser
   # Same as #parse, but removes switches destructively.
   #
   def parse!(argv = default_argv)
-    if ENV.include?('POSIXLY_CORRECT')
-      order!(argv)
-    else
+    #if ENV.include?('POSIXLY_CORRECT')
+    #  order!(argv)
+    #else
       permute!(argv)
-    end
+    #end
   end
 
   #
